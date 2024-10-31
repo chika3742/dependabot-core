@@ -13,5 +13,5 @@ fi
 dart pub get -C "$DEPENDABOT_NATIVE_HELPERS_PATH/pub/helpers"
 
 # Compile the helpers
-dart compile exe "$DEPENDABOT_NATIVE_HELPERS_PATH/pub/helpers/bin/dependency_services.dart" -o "$DEPENDABOT_NATIVE_HELPERS_PATH/pub/dependency_services"
+dart compile aot-snapshot "$DEPENDABOT_NATIVE_HELPERS_PATH/pub/helpers/bin/dependency_services.dart" -o "$DEPENDABOT_NATIVE_HELPERS_PATH/pub/dependency_services.aot" # Self-contained runtime doesn't work well
 dart compile exe "$DEPENDABOT_NATIVE_HELPERS_PATH/pub/helpers/bin/infer_sdk_versions.dart" -o "$DEPENDABOT_NATIVE_HELPERS_PATH/pub/infer_sdk_versions"

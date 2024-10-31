@@ -35,6 +35,10 @@ module Dependabot
         File.join(ENV.fetch("DEPENDABOT_NATIVE_HELPERS_PATH", nil), "pub")
       end
 
+      def self.dart_aot_runtime_path
+        File.join(ENV.fetch("DEPENDABOT_NATIVE_HELPERS_PATH", nil), "dart", "dart-sdk", "bin", "dartaotruntime")
+      end
+
       def self.run_infer_sdk_versions(dir, url: nil)
         env = {}
         cmd = File.join(pub_helpers_path, "infer_sdk_versions")
@@ -238,7 +242,8 @@ module Dependabot
 
             stdout, stderr, status = Open3.capture3(
               env.compact,
-              File.join(Helpers.pub_helpers_path, "dependency_services"),
+              Helpers.dart_aot_runtime_path,
+              File.join(Helpers.pub_helpers_path, "dependency_services.aot"),
               command,
               stdin_data: stdin_data,
               chdir: command_dir
